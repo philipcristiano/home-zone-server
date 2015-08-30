@@ -3,3 +3,6 @@
 - copy: src=auto_home dest=/etc/auto_home owner=root mode=644
 
 - authorized_key: user=root key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+- name: Use DNS Host resolution
+  command: cp /etc/nsswitch.dns /etc/nsswitch.conf
