@@ -1,5 +1,10 @@
 ---
 
+- hosts: physical
+  roles:
+  - common
+  - philipcristiano.ntp
+
 - hosts: bootstrap
   roles:
   - common
