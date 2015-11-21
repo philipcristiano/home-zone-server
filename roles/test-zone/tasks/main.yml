@@ -1,0 +1,20 @@
+---
+
+# - solaris_zone: name={{zone_name}} state=absent
+
+- solaris_zone: name={{zone_name}} state=present path=/zones/{{zone_name}} root_password="{{zone_name}}"
+    config='set autoboot=true; set ip-type=exclusive; add net; set physical={{zone_name}}; end;'
+
+- solaris_zone: name={{zone_name}} state=installed
+
+- solaris_zone: name={{zone_name}} state=running
+
+- command: zlogin test_zone5 ipadm show-if {{zone_name}}
+  register: interface_check
+  ignore_errors: True
+
+- command: zlogin test_zone5 ipadm create-addr -T dhcp {{zone_name}}/v4
+  when: interface_check|failed
+
+# copy /etc/resolv.conf
+

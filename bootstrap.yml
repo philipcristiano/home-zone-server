@@ -4,6 +4,7 @@
   roles:
   - common
   - philipcristiano.ntp
+  - test-zone
 
 - hosts: bootstrap
   roles:
