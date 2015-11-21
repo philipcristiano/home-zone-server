@@ -5,4 +5,4 @@
 - authorized_key: user=root key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 
 - name: Use DNS Host resolution
-  command: cp /etc/nsswitch.dns /etc/nsswitch.conf creates=/etc/nsswitch.conf
+  command: cp /etc/nsswitch.dns /etc/nsswitch.conf
