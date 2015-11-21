@@ -2,7 +2,6 @@
 
 - hosts: physical
   roles:
-  - common
   - philipcristiano.ntp
   - test-zone
 
