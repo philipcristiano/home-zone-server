@@ -8,3 +8,6 @@
 
 - name: Use DNS Host resolution
   command: cp /etc/nsswitch.dns /etc/nsswitch.conf
+
+- pkg5_publisher: name=ms.omniti.com sticky=true origin=http://pkg.omniti.com/omniti-ms/
+
