@@ -6,7 +6,7 @@
   - philipcristiano.ntp
   - test-zone
 
-- hosts: bootstrap
+- hosts: all
   roles:
   - common
   vars:

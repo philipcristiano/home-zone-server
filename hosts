@@ -1,5 +1,10 @@
 [physical]
 192.168.1.100
 
-[bootstrap]
+[zones]
+192.168.1.101
 192.168.1.111
+
+[all:children]
+physical
+zones
