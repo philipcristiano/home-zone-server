@@ -15,6 +15,3 @@
 
 - command: zlogin test_zone5 ipadm create-addr -T dhcp {{zone_name}}/v4
   when: interface_check|failed
-
-# copy /etc/resolv.conf
-
