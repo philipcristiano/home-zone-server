@@ -2,6 +2,8 @@
 
 # - solaris_zone: name={{zone_name}} state=absent
 
+- zfs: name=rpool/zones/{{zone_name}} state=present
+
 - solaris_zone: name={{zone_name}} state=present path=/zones/{{zone_name}} root_password="{{zone_name}}"
     config='set autoboot=true; set ip-type=exclusive; add net; set physical={{zone_name}}; end;'
 
