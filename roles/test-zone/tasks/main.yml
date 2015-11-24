@@ -4,6 +4,13 @@
 
 - zfs: name=rpool/zones/{{zone_name}} state=present
 
+- command: dladm show-vnic {{zone_name}}
+  register: physical_device_check
+  ignore_errors: True
+
+- command: dladm create-vnic -l e1000g0 {{zone_name}}
+  when: physical_device_check|failed
+
 - solaris_zone: name={{zone_name}} state=present path=/zones/{{zone_name}} root_password="{{zone_name}}"
     config='set autoboot=true; set ip-type=exclusive; add net; set physical={{zone_name}}; end;'
 
