@@ -9,9 +9,9 @@
 
 - solaris_zone: name={{zone_name}} state=running
 
-- command: zlogin test_zone5 ipadm show-if {{zone_name}}
+- command: zlogin {{zone_name}} ipadm show-addr {{zone_name}}/v4
   register: interface_check
   ignore_errors: True
 
-- command: zlogin test_zone5 ipadm create-addr -T dhcp {{zone_name}}/v4
+- command: zlogin {{zone_name}} ipadm create-addr -T dhcp {{zone_name}}/v4
   when: interface_check|failed
