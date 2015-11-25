@@ -16,11 +16,19 @@
 
 - solaris_zone: name={{zone_name}} state=installed
 
+- template: src=hostname.interface.j2 dest=/zones/{{zone_name}}/root/etc/hostname.{{zone_name}} owner=root group=root mode=0644
+
+- template: src=hostname.interface.j2 dest=/zones/{{zone_name}}/root/etc/nodename owner=root group=root mode=0644
+
+- template: src=dhcpagent.j2 dest=/zones/{{zone_name}}/root/etc/default/dhcpagent owner=root group=root mode=0644
+
+- file: path=/zones/{{zone_name}}/root/etc/dhcp.{{zone_name}} state=touch
+
 - solaris_zone: name={{zone_name}} state=running
 
 - command: zlogin {{zone_name}} ipadm show-addr {{zone_name}}/v4
   register: interface_check
   ignore_errors: True
 
-- command: zlogin {{zone_name}} ipadm create-addr -T dhcp {{zone_name}}/v4
-  when: interface_check|failed
+# - command: zlogin {{zone_name}} ipadm create-addr -T dhcp {{zone_name}}/v4
+#   when: interface_check|failed
