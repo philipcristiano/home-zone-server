@@ -17,19 +17,22 @@
 
 - solaris_zone: name={{zone_name}} state=installed
 
+# Setup files on disk before starting zone
+
 - template: src=hostname.interface.j2 dest=/zones/{{zone_name}}/root/etc/hostname.{{zone_name}} owner=root group=root mode=0644
 
 - template: src=nodename.j2 dest=/zones/{{zone_name}}/root/etc/nodename owner=root group=root mode=0644
 
 - template: src=dhcpagent.j2 dest=/zones/{{zone_name}}/root/etc/default/dhcpagent owner=root group=root mode=0644
 
+- template: src=sshd_config.j2 dest=/zones/{{zone_name}}/root/etc/ssh/sshd_config owner=root group=root mode=0644
+
 - file: path=/zones/{{zone_name}}/root/etc/dhcp.{{zone_name}} state=touch
 
+- authorized_key: user=root
+                  key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+                  path=/zones/{{zone_name}}/root/root/.ssh/authorized_keys
+
+# Start zone up!
+
 - solaris_zone: name={{zone_name}} state=running
-
-- command: zlogin {{zone_name}} ipadm show-addr {{zone_name}}/v4
-  register: interface_check
-  ignore_errors: True
-
-# - command: zlogin {{zone_name}} ipadm create-addr -T dhcp {{zone_name}}/v4
-#   when: interface_check|failed
