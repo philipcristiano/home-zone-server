@@ -3,7 +3,7 @@
 - hosts: physical
   roles:
   - philipcristiano.ntp
-  - test-zone
+  - omnios-zone
 
 - hosts: all
   roles:

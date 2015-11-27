@@ -1,7 +1,7 @@
 ---
 
-# - solaris_zone: name={{zone_name}} state=absent
-# - zfs: name=rpool/zones/{{zone_name}} state=absent
+- solaris_zone: name={{zone_name}} state=absent
+- zfs: name=rpool/zones/{{zone_name}} state=absent
 
 - zfs: name=rpool/zones/{{zone_name}} state=present
 
