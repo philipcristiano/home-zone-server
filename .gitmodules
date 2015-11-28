@@ -1,3 +1,6 @@
 [submodule "roles/philipcristiano.ntp"]
 	path = roles/philipcristiano.ntp
 	url = git@github.com:philipcristiano/ansible-role-ntp.git
+[submodule "roles/omnios-ips-repository"]
+	path = roles/omnios-ips-repository
+	url = git@github.com:philipcristiano/ansible-omnios-ips-repository.git
