@@ -1,25 +1,25 @@
 ---
 
-- solaris_zone: name={{zone_name}} state=absent
-- zfs: name=rpool/zones/{{zone_name}} state=absent
+# - solaris_zone: name={{zone_name}} state=absent
+# - zfs: name=rpool/zones/{{zone_name}} state=absent
 
 - zfs: name=rpool/zones/{{zone_name}} state=present
 
-- command: dladm show-vnic {{zone_name}}
+- command: dladm show-vnic {{net_physical}}
   register: physical_device_check
   ignore_errors: True
 
-- command: dladm create-vnic -l e1000g0 {{zone_name}}
+- command: dladm create-vnic -l e1000g0 {{net_physical}}
   when: physical_device_check|failed
 
 - solaris_zone: name={{zone_name}} state=present path=/zones/{{zone_name}} root_password="{{zone_name}}"
-    config='set autoboot=true; set ip-type=exclusive; add net; set physical={{zone_name}}; end;'
+    config='set autoboot=true; set ip-type=exclusive; add net; set physical={{net_physical}}; end;'
 
 - solaris_zone: name={{zone_name}} state=installed
 
 # Setup files on disk before starting zone
 
-- template: src=hostname.interface.j2 dest=/zones/{{zone_name}}/root/etc/hostname.{{zone_name}} owner=root group=root mode=0644
+- template: src=hostname.interface.j2 dest=/zones/{{zone_name}}/root/etc/hostname.{{net_physical}} owner=root group=root mode=0644
 
 - template: src=nodename.j2 dest=/zones/{{zone_name}}/root/etc/nodename owner=root group=root mode=0644
 
@@ -27,7 +27,7 @@
 
 - template: src=sshd_config.j2 dest=/zones/{{zone_name}}/root/etc/ssh/sshd_config owner=root group=root mode=0644
 
-- file: path=/zones/{{zone_name}}/root/etc/dhcp.{{zone_name}} state=touch
+- file: path=/zones/{{zone_name}}/root/etc/dhcp.{{net_physical}} state=touch
 
 - authorized_key: user=root
                   key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
