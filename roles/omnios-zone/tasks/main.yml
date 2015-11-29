@@ -8,14 +8,18 @@
 - command: dladm show-vnic {{net_physical}}
   register: physical_device_check
   ignore_errors: True
+  name: Check for existing VNIC on zone {{zone_name}}
 
 - command: dladm create-vnic -l e1000g0 {{net_physical}}
   when: physical_device_check|failed
+  name: Create VNIC for {{zone_name}}
 
 - solaris_zone: name={{zone_name}} state=present path=/zones/{{zone_name}} root_password="{{zone_name}}"
     config='set autoboot=true; set ip-type=exclusive; add net; set physical={{net_physical}}; end;'
+  name: Configure zone {{zone_name}}
 
 - solaris_zone: name={{zone_name}} state=installed
+  name: Install zone {{zone_name}}
 
 # Setup files on disk before starting zone
 
