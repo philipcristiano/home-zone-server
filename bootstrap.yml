@@ -3,7 +3,6 @@
 - hosts: physical
   roles:
   - philipcristiano.ntp
-  - { role: omnios-zone, zone_name: repo, net_physical: repo1}
   - { role: omnios-zone, zone_name: repo, net_physical: repo1 }
   - { role: omnios-zone, zone_name: dev, net_physical: zonedev1 }
 
