@@ -4,6 +4,8 @@
   roles:
   - philipcristiano.ntp
   - { role: omnios-zone, zone_name: repo, net_physical: repo1}
+  - { role: omnios-zone, zone_name: repo, net_physical: repo1 }
+  - { role: omnios-zone, zone_name: dev, net_physical: zonedev1 }
 
 - hosts: all
   roles:
@@ -21,3 +23,7 @@
       mount_path: /opt/storage,
       depotd_port: "10000",
       publisher: repo.home.philipcristiano.com }
+
+- hosts: dev
+  roles:
+  - dev
