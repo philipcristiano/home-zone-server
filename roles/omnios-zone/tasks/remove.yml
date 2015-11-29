@@ -1,0 +1,7 @@
+---
+
+- solaris_zone: name={{zone_name}} state=absent
+
+- zfs: name=rpool/zones/{{zone_name}} state=absent
+
+- command: dladm delete-vnic {{net_physical}}
