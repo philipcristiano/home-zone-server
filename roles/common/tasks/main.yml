@@ -1,6 +1,10 @@
 ---
 
+- include: custom_facts.yml
+
 - copy: src=auto_home dest=/etc/auto_home owner=root mode=644
+
+- zfs: name="{{zfs_root_pool}}/home" mountpoint="/export/home" state=present
 
 - authorized_key: user=root key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 

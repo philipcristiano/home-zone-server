@@ -1,0 +1,21 @@
+---
+
+- command: pkgcond is_global_zone
+  ignore_errors: True
+  register: is_global_zone_cmd
+  name: Check if global zone
+
+- set_fact:
+    is_global_zone: '{{ true if is_global_zone_cmd.rc==0 else false}}'
+
+- set_fact:
+    zfs_root_pool: 'rpool'
+    when: is_global_zone
+
+- shell: zfs list | grep 'ROOT ' | awk '{print $1}'
+  register: zfs_root_pool_cmd
+  when: not is_global_zone
+
+- set_fact:
+    zfs_root_pool: '{{zfs_root_pool_cmd.stdout}}'
+    when: not is_global_zone
