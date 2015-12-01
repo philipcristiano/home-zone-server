@@ -1,11 +1,5 @@
 ---
 
-- hosts: physical
-  roles:
-  - philipcristiano.ntp
-  - { role: omnios-zone, zone_name: repo, net_physical: repo1 }
-  - { role: omnios-zone, zone_name: dev, net_physical: zonedev1 }
-
 - hosts: all
   roles:
   - common
@@ -14,6 +8,12 @@
     nameservers:
     - 192.168.1.1
     - 8.8.8.8
+
+- hosts: physical
+  roles:
+  - philipcristiano.ntp
+  - { role: omnios-zone, zone_name: repo, net_physical: repo1 }
+  - { role: omnios-zone, zone_name: dev, net_physical: zonedev1 }
 
 - hosts: repository
   roles:
