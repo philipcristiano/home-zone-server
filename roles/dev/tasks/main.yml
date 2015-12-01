@@ -4,3 +4,4 @@
 - pkg5: name="developer/versioning/git"
 
 - user: name=pc comment="philipcristiano" group=sysadmin createhome=no
+- zfs: state=present name="{{zfs_root_pool}}/home/pc" mountpoint="/export/home/pc"
