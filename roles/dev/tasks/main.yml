@@ -3,5 +3,17 @@
 - pkg5: name="omniti/runtime/erlang@17.4.0"
 - pkg5: name="developer/versioning/git"
 
-- user: name=pc comment="philipcristiano" group=sysadmin createhome=no
+- user:
+    name=pc
+    comment="philipcristiano"
+    group=sysadmin
+    createhome=no
+    password="$5$ZLQ07Y5j$RJPmTC0F1cxfDKT7QMp36WxP1VlmLOnw8tuwCqhlOzC"
+
 - zfs: state=present name="{{zfs_root_pool}}/home/pc" mountpoint="/export/home/pc"
+
+
+- authorized_key: user=pc
+                  key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+                  path=/export/home/pc/.ssh/authorized_keys
+
