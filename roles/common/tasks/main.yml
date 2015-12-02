@@ -3,6 +3,7 @@
 - include: custom_facts.yml
 
 - copy: src=auto_home dest=/etc/auto_home owner=root mode=644
+  notify: refresh autofs
 
 - zfs: name="{{zfs_root_pool}}/home" mountpoint="/export/home" state=present
 

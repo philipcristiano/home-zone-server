@@ -1,0 +1,4 @@
+---
+
+- service: name=autofs state=reloaded
+  name: refresh autofs
