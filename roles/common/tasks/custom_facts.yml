@@ -17,5 +17,5 @@
   when: not is_global_zone
 
 - set_fact:
-    zfs_root_pool: '{{zfs_root_pool_cmd.stdout}}'
+    zfs_root_pool: '{{zfs_root_pool_cmd.get("stdout", "")}}'
     when: not is_global_zone
