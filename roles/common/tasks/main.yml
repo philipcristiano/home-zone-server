@@ -5,7 +5,9 @@
 - copy: src=auto_home dest=/etc/auto_home owner=root mode=644
   notify: refresh autofs
 
-- zfs: name="{{zfs_root_pool}}/home" mountpoint="/export/home" state=present
+- name: Mount home dataset
+  zfs: name="{{zfs_root_pool}}/home" mountpoint="/export/home" state=present
+  when: not is_global_zone
 
 - authorized_key: user=root key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 
@@ -15,4 +17,3 @@
   command: cp /etc/nsswitch.dns /etc/nsswitch.conf
 
 - pkg5_publisher: name=ms.omniti.com sticky=true origin=http://pkg.omniti.com/omniti-ms/
-
