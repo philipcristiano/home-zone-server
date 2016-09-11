@@ -4,3 +4,6 @@
 [submodule "roles/omnios-ips-repository"]
 	path = roles/omnios-ips-repository
 	url = git@github.com:philipcristiano/ansible-omnios-ips-repository.git
+[submodule "ansible/modules-extras"]
+	path = ansible/modules-extras
+	url = git@github.com:ansible/ansible-modules-extras.git
