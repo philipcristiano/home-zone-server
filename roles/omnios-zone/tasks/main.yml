@@ -3,7 +3,8 @@
 # - solaris_zone: name={{zone_name}} state=absent
 # - zfs: name=rpool/zones/{{zone_name}} state=absent
 
-- zfs: name=rpool/zones/{{zone_name}} state=present
+- name: Create zone ZFS dataset
+  zfs: name=rpool/zones/{{zone_name}} state=present
 
 - command: dladm show-vnic {{net_physical}}
   register: physical_device_check
