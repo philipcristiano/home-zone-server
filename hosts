@@ -9,6 +9,7 @@ repo.home.philipcristiano.com
 
 [dev]
 dev.home.philipcristiano.com
+test.home.philipcristiano.com
 
 [all:children]
 dev
