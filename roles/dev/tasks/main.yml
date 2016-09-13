@@ -1,7 +1,7 @@
 ---
 
-- name: Install Erlang 17.4
-  pkg5: name="omniti/runtime/erlang@17.4.0"
+- name: Install Erlang 18
+  pkg5: name="omniti/runtime/erlang@18"
 
 - name: Install Git
   pkg5: name="developer/versioning/git"
