@@ -15,6 +15,10 @@
 
 - zfs: state=present name="{{zfs_root_pool}}/home/pc" mountpoint="/export/home/pc"
 
+- name: Grant pc ownership of home
+  file:
+    path: /export/home/pc
+    owner: pc
 
 - authorized_key: user=pc
                   key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
