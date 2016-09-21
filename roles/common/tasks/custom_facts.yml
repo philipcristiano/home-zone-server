@@ -1,11 +1,12 @@
 ---
 
-- command: pkgcond is_global_zone
+- name: Check if global zone
+  command: pkgcond is_global_zone
   ignore_errors: True
   register: is_global_zone_cmd
-  name: Check if global zone
 
-- set_fact:
+- name: Set fact is_global_zone
+  set_fact:
     is_global_zone: '{{ true if is_global_zone_cmd.rc==0 else false}}'
 
 - set_fact:
