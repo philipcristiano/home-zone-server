@@ -1,0 +1,47 @@
+---
+
+- name: Create zone ZFS dataset
+  zfs: name=rpool/zones/{{zone_name}} state=present
+
+- command: dladm show-vnic {{net_physical}}
+  register: physical_device_check
+  ignore_errors: True
+  name: Check for existing VNIC on zone {{zone_name}}
+
+- command: dladm create-vnic -l e1000g0 {{net_physical}}
+  when: physical_device_check|failed
+  name: Create VNIC for {{zone_name}}
+
+- solaris_zone: name={{zone_name}} state=present path=/zones/{{zone_name}} root_password="{{zone_name}}"
+    config='set autoboot=true; set ip-type=exclusive; add net; set physical={{net_physical}}; end;'
+  name: Configure zone {{zone_name}}
+
+- solaris_zone: name={{zone_name}} state=installed
+  name: Install zone {{zone_name}}
+
+# Setup files on disk before starting zone
+
+- name: Create zone hostname file
+  template: src=hostname.interface.j2 dest=/zones/{{zone_name}}/root/etc/hostname.{{net_physical}} owner=root group=root mode=0644
+
+- name: Create zone nodename file
+  template: src=nodename.j2 dest=/zones/{{zone_name}}/root/etc/nodename owner=root group=root mode=0644
+
+- name: Create zone dhcpagent file
+  template: src=dhcpagent.j2 dest=/zones/{{zone_name}}/root/etc/default/dhcpagent owner=root group=root mode=0644
+
+- name: Create zone sshd_config file
+  template: src=sshd_config.j2 dest=/zones/{{zone_name}}/root/etc/ssh/sshd_config owner=root group=root mode=0644
+
+- name: Create zone dhcp interface file
+  file: path=/zones/{{zone_name}}/root/etc/dhcp.{{net_physical}} state=touch
+
+- name: Add authorized key for root in zone {{zone_name}}
+  authorized_key: user=root
+                  key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+                  path=/zones/{{zone_name}}/root/root/.ssh/authorized_keys
+
+# Start zone up!
+
+- name: Start zone {{zone_name}}
+  solaris_zone: name={{zone_name}} state=running
