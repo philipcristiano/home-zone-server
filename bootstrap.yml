@@ -15,6 +15,9 @@
   - { role: omnios-zone, zone_name: repo, net_physical: repo1 }
   - { role: omnios-zone, zone_name: dev, net_physical: zonedev1 }
   - { role: omnios-zone, zone_name: test, net_physical: zonetest1 }
+  - { role: omnios-zone, zone_name: daltest1, net_physical: daltest1 }
+  - { role: omnios-zone, zone_name: zmbuild, net_physical: zmbuild1 }
+  - { role: omnios-zone, zone_name: zmstage, net_physical: zmstage1 }
 
 - hosts: repository
   roles:
