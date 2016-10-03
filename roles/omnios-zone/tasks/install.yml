@@ -3,14 +3,8 @@
 - name: Create zone ZFS dataset
   zfs: name=rpool/zones/{{zone_name}} state=present
 
-- command: dladm show-vnic {{net_physical}}
-  register: physical_device_check
-  ignore_errors: True
-  name: Check for existing VNIC on zone {{zone_name}}
-
-- command: dladm create-vnic -l e1000g0 {{net_physical}}
-  when: physical_device_check|failed
-  name: Create VNIC for {{zone_name}}
+- name: "Create VNIC for {{zone_name}}"
+  dladm_vnic: name={{net_physical}} link=e1000g0
 
 - solaris_zone: name={{zone_name}} state=present path=/zones/{{zone_name}} root_password="{{zone_name}}"
     config='set autoboot=true; set ip-type=exclusive; add net; set physical={{net_physical}}; end;'

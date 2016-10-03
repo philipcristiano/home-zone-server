@@ -5,4 +5,5 @@
 
 - zfs: name=rpool/zones/{{zone_name}} state=absent
 
-- command: dladm delete-vnic {{net_physical}}
+- name: dladm delete-vnic {{net_physical}}
+  dladm_vnic: name={{net_physical}} link={{net_physical}} state=absent
