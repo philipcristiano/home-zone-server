@@ -1,0 +1,17 @@
+---
+
+- name: Install gnu-make
+  pkg5: name="gnu-make"
+
+- name: Checkout Zone Man
+  git: repo=https://github.com/philipcristiano/zone_man.git
+       dest={{zone_man_build_dir}}
+       version={{zone_man_ref}}
+
+- name: Build Zone Man
+  shell: /usr/gnu/bin/make deps app package publish
+  args:
+    chdir: "{{zone_man_build_dir}}"
+  environment:
+    PATH: /opt/omni/bin/:/usr/gnu/bin:/usr/bin:/bin
+    PKGSRVR: "{{zone_man_pkgsrvr}}"
