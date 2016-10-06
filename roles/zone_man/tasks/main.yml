@@ -1,0 +1,12 @@
+---
+
+- name: Refresh PKG
+  command: pkg refresh
+
+- name: Install Zone Manager
+  pkg5: name="zone_man" state=latest
+  notify:
+    - restart zone_man
+
+- name: Enable zone_man
+  service: name=zone_man state=started

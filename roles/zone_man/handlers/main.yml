@@ -1,0 +1,3 @@
+- name: restart zone_man
+  service: name=zone_man state=restarted
+

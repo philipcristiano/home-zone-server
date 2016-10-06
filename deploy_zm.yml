@@ -3,3 +3,7 @@
 - hosts: zmbuild
   roles:
   - zone_man_build
+
+- hosts: zmstage
+  roles:
+  - zone_man
