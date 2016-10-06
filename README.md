@@ -8,6 +8,10 @@ run directly from the venv.
 
     ANSIBLE_LIBRARY="ansible/modules-extras" /Users/philipcristiano/virtualenvs/home-server/bin/ansible-playbook -u root bootstrap.yml -i hosts
 
+Running against zones
+
+    ANSIBLE_LIBRARY=ansible/modules-extras/ ansible-playbook -u root bootstrap.yml -i dyn_hosts.py
+
 ### Deploying Zone Man
 
 Set `zone_man_pkgsrvr` for publishing

@@ -1,23 +1,5 @@
 [physical]
 192.168.1.100
 
-[zones]
-
-[repository]
-repo.home.philipcristiano.com
-
-[dev]
-dev.home.philipcristiano.com
-test.home.philipcristiano.com
-daltest1.home.philipcristiano.com
-zmbuild.home.philipcristiano.com
-zmstage.home.philipcristiano.com
-
-[zmbuild]
-zmbuild.home.philipcristiano.com
-
 [all:children]
-dev
 physical
-repository
-zones
