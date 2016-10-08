@@ -3,6 +3,12 @@
 - name: Install gnu-make
   pkg5: name="gnu-make"
 
+- name: Install git
+  pkg5: name="developer/versioning/git"
+
+- name: Install Erlang 18
+  pkg5: name="omniti/runtime/erlang@18"
+
 - name: Checkout Zone Man
   git: repo=https://github.com/philipcristiano/zone_man.git
        dest={{zone_man_build_dir}}
