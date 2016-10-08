@@ -7,3 +7,7 @@
 - hosts: zmstage
   roles:
   - zone_man
+
+- hosts: physical
+  roles:
+  - zone_man
