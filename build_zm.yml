@@ -1,0 +1,5 @@
+---
+
+- hosts: zmbuild
+  roles:
+  - zone_man_build
