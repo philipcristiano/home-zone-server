@@ -27,8 +27,10 @@ import requests
 
 class HostAggr(object):
 
-    def __init__(self):
-        self._roles = {}
+    def __init__(self, initial=None):
+        if initial is None:
+            initial = {}
+        self._roles = initial
 
     def _default_role(self, role):
         return {'hosts': [], 'vars': {'roles': [role]}}
@@ -44,7 +46,7 @@ class HostAggr(object):
         return json.dumps(self._roles, indent=4)
 
 def list_hosts(config):
-    aggr = HostAggr()
+    aggr = HostAggr({'physical': ['192.168.1.100']})
     for server, domain in config['servers'].iteritems():
         resp = requests.get('http://{}/v1/zones'.format(server))
         data = resp.json()
