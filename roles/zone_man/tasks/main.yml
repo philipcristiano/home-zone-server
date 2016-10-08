@@ -12,4 +12,4 @@
   service: name=zone_man state=started
 
 - name: Wait for port
-  wait_for: port=10000 delay=10
+  wait_for: port=8080 delay=1 timeout=10
