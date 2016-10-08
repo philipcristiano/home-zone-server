@@ -1,5 +1,5 @@
 ---
 
 zone_man_ref: master
-zone_man_build_dir: /home/pc/zone_man
+zone_man_build_dir: /tmp/zone_man
 zone_man_pkgsrvr: False
