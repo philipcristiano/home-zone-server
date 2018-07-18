@@ -1,7 +1,18 @@
 ---
 
+- name: Create host ZFS dataset for zones
+  zfs:
+    name: rpool/zone
+    state: present
+    extra_zfs_properties:
+      mountpoint: /zones
+
 - name: Create zone ZFS dataset
-  zfs: name=rpool/zones/{{zone_name}} state=present
+  zfs:
+    name: rpool/zones/{{zone_name}}
+    state: present
+    extra_zfs_properties:
+      mountpoint: /zones/{{zone_name}}
 
 - name: "Create VNIC for {{zone_name}}"
   dladm_vnic: name={{net_physical}} link=e1000g0

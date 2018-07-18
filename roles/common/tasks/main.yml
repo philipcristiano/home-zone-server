@@ -16,7 +16,22 @@
 - name: Use DNS Host resolution
   command: cp /etc/nsswitch.dns /etc/nsswitch.conf
 
-- pkg5_publisher: name=ms.omniti.com sticky=true origin=http://pkg.omniti.com/omniti-ms/
+- name: Enable DNS Service
+  service:
+    name: svc:/network/dns/client
+    enabled: yes
+    state: started
 
-- name: Add repo.home PKG Publisher
-  pkg5_publisher: name=repo.home.philipcristiano.com sticky=true origin=http://repo.home.philipcristiano.com:10000
+- name: Add OmniTI Cert
+  copy:
+    src: omniti-cert.pem
+    dest: /etc/ssl/pkg/OmniTI.pem
+
+- name: Add ms.omniti PKG Publisher
+  pkg5_publisher:
+    name: ms.omniti.com
+    sticky: true
+    origin: http://pkg.omniti.com/omniti-ms/
+
+# - name: Add repo.home PKG Publisher
+#   pkg5_publisher: name=repo.home.philipcristiano.com sticky=true origin=http://repo.home.philipcristiano.com:10000

@@ -12,25 +12,21 @@
 - hosts: physical
   roles:
   - philipcristiano.ntp
-  - { role: omnios-zone, zone_name: repo, net_physical: repo1 }
+  # - { role: omnios-zone, zone_name: repo, net_physical: repo1 }
   - { role: omnios-zone, zone_name: dev, net_physical: zonedev1 }
-  - { role: omnios-zone, zone_name: test, net_physical: zonetest1 }
-  - { role: omnios-zone, zone_name: inuc-zmbuild, net_physical: zmbuild2 }
-  - { role: omnios-zone, zone_name: inuc-zmstage, net_physical: zmstage2 }
-  - { role: omnios-zone, zone_name: zoneman-dev, net_physical: zonemanedev1}
+  # - { role: omnios-zone, zone_name: test, net_physical: zonetest1 }
+  # - { role: omnios-zone, zone_name: inuc-zmbuild, net_physical: zmbuild2 }
+  # - { role: omnios-zone, zone_name: inuc-zmstage, net_physical: zmstage2 }
+  # - { role: omnios-zone, zone_name: zoneman-dev, net_physical: zonemanedev1}
 
 
-- hosts: repository
-  roles:
-  - { role: omnios-ips-repository,
-      dataset: rpool/zones/repo/ROOT/storage,
-      mount_path: /opt/storage,
-      depotd_port: "10000",
-      publisher: repo.home.philipcristiano.com }
-
-- hosts: dev
-  roles:
-  - dev
+# - hosts: repository
+#   roles:
+#   - { role: omnios-ips-repository,
+#       dataset: rpool/zones/repo/ROOT/storage,
+#       mount_path: /opt/storage,
+#       depotd_port: "10000",
+#       publisher: repo.home.philipcristiano.com }
 
 - hosts: dev
   roles:
