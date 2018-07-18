@@ -1,7 +1,7 @@
 ---
 
-- name: Install Erlang 18
-  pkg5: name="omniti/runtime/erlang@18"
+- name: Install Erlang 19
+  pkg5: name="omniti/runtime/erlang@19"
 
 - name: Install Git
   pkg5: name="developer/versioning/git"
@@ -23,4 +23,3 @@
 - authorized_key: user=pc
                   key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
                   path=/export/home/pc/.ssh/authorized_keys
-
