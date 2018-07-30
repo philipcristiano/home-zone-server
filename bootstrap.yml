@@ -3,11 +3,6 @@
 - hosts: all
   roles:
   - common
-  vars:
-    domain: home.philipcristiano.com
-    nameservers:
-    - 192.168.1.1
-    - 8.8.8.8
 
 - hosts: physical
   roles:
