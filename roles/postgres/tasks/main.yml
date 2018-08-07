@@ -38,6 +38,12 @@
     dest: /export/databases/pgsql/postgresql.conf
   notify: restart postgres
 
+- name: Ensure postgres hba configuration
+  template:
+    src: pg_hba.conf
+    dest: /export/databases/pgsql/pg_hba.conf
+  notify: restart postgres
+
 - name: Ensure DB svc directory
   file:
     path: /lib/svc/manifest/application/database
