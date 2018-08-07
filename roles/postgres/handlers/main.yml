@@ -1,0 +1,6 @@
+---
+
+- service:
+    name: postgresql_103
+    state: reloaded
+  name: restart postgres

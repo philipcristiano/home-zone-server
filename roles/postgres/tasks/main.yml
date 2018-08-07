@@ -32,6 +32,12 @@
     owner: postgres
     group: postgres
 
+- name: Ensure postgres configuration
+  template:
+    src: postgresql.conf
+    dest: /export/databases/pgsql/postgresql.conf
+  notify: restart postgres
+
 - name: Ensure DB svc directory
   file:
     path: /lib/svc/manifest/application/database
