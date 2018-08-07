@@ -1,0 +1,52 @@
+- name: Install postgres
+  pkg5:
+    name: "{{ postgres_package }}"
+
+
+- name: Install start script
+  copy:
+    src: method
+    dest: /lib/svc/method/postgres
+    owner: root
+    group: sys
+    mode: 0755
+
+- name: Create Home Dir
+  file:
+    path: /export/home/postgres
+    state: directory
+    owner: postgres
+    group: postgres
+
+- name: Create postgres database ZFS dataset
+  zfs:
+    name: "{{zfs_root_pool}}/databases/postgres"
+    state: present
+    extra_zfs_properties:
+      mountpoint: "/export/databases/pgsql"
+
+- name: Set pgsql data dir permissions
+  file:
+    path: /export/databases/pgsql
+    state: directory
+    owner: postgres
+    group: postgres
+
+- name: Ensure DB svc directory
+  file:
+    path: /lib/svc/manifest/application/database
+    state: directory
+    owner: root
+    group: sys
+
+- name: Install SMF manifest
+  copy:
+    src: smf.xml
+    dest: /lib/svc/manifest/application/database/postgresql_103.xml
+    owner: root
+    mode: 644
+
+- name: Import manifests
+  service:
+    name: svc:/system/manifest-import:default
+    state: restarted

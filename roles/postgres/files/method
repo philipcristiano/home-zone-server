@@ -35,7 +35,7 @@ getproparg()
       [ -n "$val" ] && echo $val
 }
 
-PGBIN=/usr/bin
+PGBIN=`getproparg postgresql/bin`
 PGDATA=`getproparg postgresql/data`
 PGLOG=`getproparg postgresql/log`
 

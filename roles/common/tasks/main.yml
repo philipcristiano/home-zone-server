@@ -33,5 +33,11 @@
     sticky: true
     origin: http://pkg.omniti.com/omniti-ms/
 
+- name: Add repo.stratobuilder PKG Publisher
+  pkg5_publisher:
+    name: repository.stratobuilder.com
+    sticky: true
+    origin: http://repository.stratobuilder.com
+
 # - name: Add repo.home PKG Publisher
 #   pkg5_publisher: name=repo.home.philipcristiano.com sticky=true origin=http://repo.home.philipcristiano.com:10000

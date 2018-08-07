@@ -1,0 +1,12 @@
+- hosts: physical
+  roles:
+  - { role: omnios-zone, zone_name: ddbpg, net_physical: ddbpg1 }
+
+- hosts: ddbpg
+
+  vars:
+    postgres_package: pkg:/omniti/database/postgresql-103
+
+  roles:
+  - common
+  - postgres
