@@ -6,7 +6,11 @@
 
   vars:
     postgres_package: pkg:/omniti/database/postgresql-103
+  vars_files:
+  - ../secrets/dalmatiner_pg.yml
 
   roles:
   - common
   - postgres
+  - dalmatiner_pg
+

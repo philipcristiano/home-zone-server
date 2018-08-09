@@ -2,7 +2,6 @@
   pkg5:
     name: "{{ postgres_package }}"
 
-
 - name: Install start script
   copy:
     src: method

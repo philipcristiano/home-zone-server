@@ -1,0 +1,23 @@
+---
+
+- name: Create ddb PG user
+  delegate_to: 127.0.0.1
+  postgresql_user:
+    name: ddb
+    password: "{{ ddb_pg_password }}"
+    encrypted: yes
+
+    login_host: "{{ inventory_hostname }}"
+    login_user: "{{ login_user }}"
+    login_password: "{{ login_password }}"
+
+
+- name: Create ddb PG db
+  delegate_to: 127.0.0.1
+  postgresql_db:
+    name: metric_metadata
+    owner: ddb
+
+    login_host: "{{ inventory_hostname }}"
+    login_user: "{{ login_user }}"
+    login_password: "{{ login_password }}"
