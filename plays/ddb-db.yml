@@ -1,0 +1,16 @@
+- hosts: physical
+  roles:
+  - { role: omnios-zone, zone_name: ddbdb01, net_physical: ddbdb1 }
+
+- hosts: ddbdb
+
+  vars:
+    ddb_roles:
+    - db
+  vars_files:
+  - ../secrets/dalmatiner_db.yml
+
+  roles:
+  - common
+  - dalmatinerdb
+

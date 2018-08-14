@@ -1,0 +1,11 @@
+---
+
+- name: Install DalmatinerDB
+  pkg5:
+    name: "dalmatinerdb"
+
+- name: Start DalmatinerDB
+  service:
+    name: svc:/application/dalmatinerdb:default
+    enabled: yes
+    state: started
