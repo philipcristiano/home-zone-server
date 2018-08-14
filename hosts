@@ -10,6 +10,9 @@
 [ddbdb]
 192.168.1.177
 
+[ddbfe]
+192.168.1.179
+
 [all:children]
 physical
 dev
