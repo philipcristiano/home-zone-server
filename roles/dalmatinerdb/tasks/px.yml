@@ -1,0 +1,26 @@
+---
+
+- name: Install DalmatinerDB
+  pkg5:
+    name: "dalmatinerpx"
+    state: latest
+
+- name: Debug
+  debug:
+    msg: "{{ hostvars[groups['ddbdb'][0]]['inventory_hostname'] }}"
+
+- name: Ensure config file
+  template:
+    src: dpx.conf.j2
+    dest: /data/dalmatinerpx/etc/dpx.conf
+
+- name: Import manifests
+  service:
+    name: svc:/system/manifest-import:default
+    state: restarted
+
+# - name: Start DalmatinerDB
+#   service:
+#     name: svc:/application/dalmatinerdb:default
+#     enabled: yes
+#     state: started

@@ -3,6 +3,12 @@
 - name: Install DalmatinerDB
   pkg5:
     name: "dalmatinerdb"
+    state: latest
+
+- name: Import manifests
+  service:
+    name: svc:/system/manifest-import:default
+    state: restarted
 
 - name: Start DalmatinerDB
   service:
