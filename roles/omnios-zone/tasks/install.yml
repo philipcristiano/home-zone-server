@@ -33,7 +33,7 @@
   template: src=nodename.j2 dest=/zones/{{zone_name}}/root/etc/nodename owner=root group=root mode=0644
 
 - name: Create zone dhcpagent file
-  template: src=dhcpagent.j2 dest=/zones/{{zone_name}}/root/etc/default/dhcpagent owner=root group=root mode=0644
+  template: src=dhcpagent.j2 dest=/zones/{{zone_name}}/root/etc/default/dhcpagent owner=root group=sys mode=0644
 
 - name: Create zone sshd_config file
   template: src=sshd_config.j2 dest=/zones/{{zone_name}}/root/etc/ssh/sshd_config owner=root group=root mode=0644
