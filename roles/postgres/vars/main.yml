@@ -1,3 +1,4 @@
 postgres_list_address: '*'
 postgres_hba:
-  - "host   all   all 192.168.1.1/24  scram-sha-256"
+  - "host   all   all 192.168.1.1/24  md5"
+postgres_password_encryption: on

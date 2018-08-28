@@ -1,6 +1,6 @@
 ---
 
 - service:
-    name: postgresql_103
+    name: svc:/application/database/postgresql_105:default
     state: reloaded
   name: restart postgres

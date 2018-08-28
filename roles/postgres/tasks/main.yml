@@ -1,14 +1,14 @@
 - name: Install postgres
   pkg5:
-    name: "{{ postgres_package }}"
+    name: pkg://repository.stratobuilder.com/server/postgresql-105
 
-- name: Install start script
-  copy:
-    src: method
-    dest: /lib/svc/method/postgres
-    owner: root
-    group: sys
-    mode: 0755
+# - name: Install start script
+#   copy:
+#     src: method
+#     dest: /lib/svc/method/postgres
+#     owner: root
+#     group: sys
+#     mode: 0755
 
 - name: Create Home Dir
   file:
@@ -43,21 +43,33 @@
     dest: /export/databases/pgsql/pg_hba.conf
   notify: restart postgres
 
-- name: Ensure DB svc directory
-  file:
-    path: /lib/svc/manifest/application/database
-    state: directory
-    owner: root
-    group: sys
-
-- name: Install SMF manifest
-  copy:
-    src: smf.xml
-    dest: /lib/svc/manifest/application/database/postgresql_103.xml
-    owner: root
-    mode: 644
+# - name: Ensure DB svc directory
+#   file:
+#     path: /lib/svc/manifest/application/database
+#     state: directory
+#     owner: root
+#     group: sys
+#
+# - name: Install SMF manifest
+#   copy:
+#     src: smf.xml
+#     dest: /lib/svc/manifest/application/database/postgresql_103.xml
+#     owner: root
+#     mode: 644
 
 - name: Import manifests
   service:
     name: svc:/system/manifest-import:default
     state: restarted
+
+- name: Start postgres
+  service:
+    name: svc:/application/database/postgresql_105:default
+    state: started
+
+- meta: flush_handlers
+
+- name: Wait for postgres
+  wait_for:
+    port: 5432
+    delay: 10

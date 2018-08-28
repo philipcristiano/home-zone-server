@@ -23,7 +23,7 @@
 
  CDDL HEADER END
 
- ident	"@(#)postgresql_103.xml	1.1	09/10/13 SMI"
+ ident	"@(#)postgresql_966.xml	1.1	09/10/13 SMI"
 
         NOTE:  This service manifest is not editable; its contents will
         be overwritten by package or patch operations, including
@@ -31,10 +31,10 @@
         file.
 -->
 
-<service_bundle type='manifest' name='postgresql_103'>
+<service_bundle type='manifest' name='postgresql_966'>
 
 <service
-        name='application/database/postgresql_103'
+        name='application/database/postgresql_966'
         type='service'
         version='1'>
 
@@ -109,7 +109,7 @@
 		   postgresql.conf is different than the other instances.
 		-->
         	<property_group name='postgresql' type='application'>
-                	<propval name='bin' type='astring' value='/opt/pgsql103/bin/' />
+                	<propval name='bin' type='astring' value='/opt/pgsql966/bin/' />
                 	<propval name='data' type='astring' value='/export/databases/pgsql' />
                 	<propval name='log' type='astring' value='server.log' />
 			<propval name='initialized' type='boolean'
@@ -129,7 +129,7 @@
                         </loctext>
                 </common_name>
                 <documentation>
-                        <manpage title='postgres_103' section='5' />
+                        <manpage title='postgres_966' section='5' />
                         <doc_link name='postgresql.org'
                                 uri='http://postgresql.org' />
                 </documentation>
