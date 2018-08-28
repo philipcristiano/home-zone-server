@@ -6,12 +6,23 @@
   notify: refresh autofs
 
 - name: Mount home dataset
-  zfs: name="{{zfs_root_pool}}/home" mountpoint="/export/home" state=present
+  zfs:
+    name: "{{zfs_root_pool}}/home"
+    state: present
+    extra_zfs_properties:
+      mountpoint: "/export/home"
+
   when: not is_global_zone
 
 - authorized_key: user=root key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 
-- template: src=resolv.conf.j2 dest=/etc/resolv.conf owner=root group=root mode=0644
+- name: Install resolv.conf
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+    owner: root
+    group: root
+    mode: 0644
 
 - name: Use DNS Host resolution
   command: cp /etc/nsswitch.dns /etc/nsswitch.conf
