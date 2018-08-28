@@ -1,0 +1,19 @@
+- hosts: physical
+  roles:
+  - { role: omnios-zone, zone_name: ddbpx, net_physical: ddbpx1 }
+
+- hosts: ddbpx
+
+  vars:
+    ddb_roles:
+    - px
+    ddbpx_idx_pg_backend_host: "{{ hostvars[groups['ddbpg'][0]]['inventory_hostname'] }}"
+    ddbpx_db_connection_backend_host: "{{ hostvars[groups['ddbdb'][0]]['inventory_hostname'] }}"
+    ddbpx_idx_pg_backend_password: "{{ ddb_pg_password }}"
+  vars_files:
+  - ../secrets/dalmatiner_px.yml
+
+  roles:
+  - common
+  - dalmatinerdb
+

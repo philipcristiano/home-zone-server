@@ -5,7 +5,8 @@
 - hosts: ddbpg
 
   vars:
-    postgres_package: pkg:/omniti/database/postgresql-103
+    postgres_package: pkg:/omniti/database/postgresql-966
+    postgres_password_encryption: md5
   vars_files:
   - ../secrets/dalmatiner_pg.yml
 
@@ -13,4 +14,3 @@
   - common
   - postgres
   - dalmatiner_pg
-

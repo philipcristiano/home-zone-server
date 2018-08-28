@@ -2,7 +2,23 @@
 
 - name: Install DalmatinerDB
   pkg5:
-    name: "dalmatinerfe"
+    name: "dalmatinerpx"
+    state: latest
+
+- name: Debug
+  debug:
+    msg: "{{ hostvars[groups['ddbdb'][0]]['inventory_hostname'] }}"
+
+
+- name: Ensure config file
+  template:
+    src: dfe.conf.j2
+    dest: /data/dalmatinerfe/etc/dfe.conf
+
+- name: Import manifests
+  service:
+    name: svc:/system/manifest-import:default
+    state: restarted
 
 # - name: Start DalmatinerDB
 #   service:

@@ -19,8 +19,8 @@
     name: svc:/system/manifest-import:default
     state: restarted
 
-# - name: Start DalmatinerDB
-#   service:
-#     name: svc:/application/dalmatinerdb:default
-#     enabled: yes
-#     state: started
+- name: Start DalmatinerDB
+  service:
+    name: svc:/application/dalmatinerpx:default
+    enabled: yes
+    state: started

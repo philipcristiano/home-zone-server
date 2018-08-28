@@ -7,6 +7,9 @@
   vars:
     ddb_roles:
     - fe
+    ddbfe_idx_pg_backend_host: "{{ hostvars[groups['ddbpg'][0]]['inventory_hostname'] }}"
+    ddbfe_db_connection_backend_host: "{{ hostvars[groups['ddbdb'][0]]['inventory_hostname'] }}"
+    ddbfe_idx_pg_backend_password: "{{ ddb_pg_password }}"
   vars_files:
   - ../secrets/dalmatiner_fe.yml
 

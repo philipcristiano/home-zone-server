@@ -6,3 +6,5 @@
 - include: fe.yml
   when: '["fe"] | intersect( ddb_roles )'
 
+- include: px.yml
+  when: '["px"] | intersect( ddb_roles )'
